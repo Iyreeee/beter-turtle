@@ -193,7 +193,7 @@ function library:Window(name)
         Button.TextStrokeTransparency = 123.000
         Button.TextWrapped = true
         Button.Text = name
-        Button.MouseButton1Down:Connect(callback)
+        Button.MouseButton1Up:Connect(callback)
 
         pastSliders[winCount] = false
     end
@@ -218,18 +218,18 @@ function library:Window(name)
         Label.ZIndex = 2 + zindex
 
         if type(color) == "boolean" and color then
-	    spawn(function()
-                while wait() do
-                    local hue = tick() % 5 / 5
-                    Label.TextColor3 = Color3.fromHSV(hue, 1, 1)
-                end
-	    end)
+            spawn(function()
+                    while wait() do
+                        local hue = tick() % 5 / 5
+                        Label.TextColor3 = Color3.fromHSV(hue, 1, 1)
+                    end
+            end)
         else
             Label.TextColor3 = color
         end
         pastSliders[winCount] = false
         return function(newText)
-            Label.Text = newText or "Label"
+            Label.Text = newText
         end
     end
     function functions:Toggle(text, on, callback)
